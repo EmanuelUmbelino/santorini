@@ -47,12 +47,12 @@ function resetPanel() {
   panel.style.height = '90%';
   panel.style.top = '5%';
   panel.style.left = '5%';
-  setTimeout(() => {
 
-  panel_width = toInt(getComputedStyle(panel).width);
-  panel_height = toInt(getComputedStyle(panel).height);
-  panel_top = toInt(getComputedStyle(panel).top);
-  panel_left = toInt(getComputedStyle(panel).left);
+  setTimeout(() => {
+    panel_width = toInt(getComputedStyle(panel).width);
+    panel_height = toInt(getComputedStyle(panel).height);
+    panel_top = toInt(getComputedStyle(panel).top);
+    panel_left = toInt(getComputedStyle(panel).left);
 
     const imageStl = getComputedStyle(imagePreview);
 
@@ -145,7 +145,6 @@ function generateJson() {
   jsonPanel.appendChild(createCodeLine("]", 1));
   jsonPanel.appendChild(createCodeLine("}", 0));
 }
-
 function createCodeLine(text, ident) {
   const line = document.createElement("li");
   line.innerHTML = '&nbsp;'.repeat(ident*4) + text;
@@ -190,8 +189,9 @@ function toInt(value) {
 }
 
 function copyToClipboard() {
-  navigator.clipboard.writeText(jsonPanel.innerText);
-  alert("Copied the Json!");
+  let text = jsonPanel.innerText;
+  text = text.replace(/[^a-zA-Z0-9 \n{},:"'\[\]]/g, ' ');
+  navigator.clipboard.writeText(text);
 }
 
 const panel = document.getElementById("grid_panel");
@@ -210,6 +210,10 @@ const players = ['N', 'A', 'C'];
 document.addEventListener("mouseup", function(){
   document.removeEventListener("mousemove", resize, false);
 }, false);
+
+addEventListener("resize", function () {
+  resetPanel();
+});
 
 if(localStorage.getItem("image")) {
   imagePreview.setAttribute("src", localStorage.getItem("image"))
