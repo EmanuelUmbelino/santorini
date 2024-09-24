@@ -9,7 +9,7 @@ json_path = None
 output_folder = None
 
 if image_path is None:
-  input('1º: Select the image you want to classify')
+  input('Select the image you want to classify')
 
   root = tk.Tk()
   root.withdraw()
@@ -22,7 +22,7 @@ if image_path is None:
   print()
 
 if json_path is None:
-  input('2º: Select the Json to classify')
+  input('Select the Json to classify')
 
   json_path = filedialog.askopenfilename()
   print('Json path:')
@@ -32,7 +32,7 @@ if json_path is None:
   print()
 
 if output_folder is None:
-  input('3º: Select the folder to save the classified images')
+  input('Select the folder to save the classified images')
 
   directory_path = filedialog.askdirectory()
   print('Folder path:')
