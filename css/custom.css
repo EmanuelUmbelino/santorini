@@ -1,0 +1,46 @@
+.cursor-nw-resize {
+  cursor: nw-resize;
+}
+.cursor-ne-resize {
+  cursor: ne-resize;
+}
+.cursor-sw-resize {
+  cursor: sw-resize;
+}
+.cursor-se-resize {
+  cursor: se-resize;
+}
+
+li::marker {
+  color: rgb(70 80 100);
+}
+
+.t-key {
+  color: #30dcff;
+}
+.t-value {
+  color: #f89b12;
+}
+.t-string {
+  color: #1bec44;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-grow: 1;
+    &:first-child {
+      justify-content: end;
+    }
+
+  }
+}
