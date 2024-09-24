@@ -4,30 +4,39 @@ from tkinter import filedialog
 from PIL import Image
 import json
 
-input('1º: Select the image you want to classify')
+image_path = None
+json_path = None
+output_folder = None
 
-root = tk.Tk()
-root.withdraw()
+if image_path is None:
+  input('1º: Select the image you want to classify')
 
-image_path = filedialog.askopenfilename()
-print('Image path:')
-print(image_path)
+  root = tk.Tk()
+  root.withdraw()
 
-print()
-print()
-input('2º: Select the Json to classify')
+  image_path = filedialog.askopenfilename()
+  print('Image path:')
+  print(image_path)
 
-json_path = filedialog.askopenfilename()
-print('Json path:')
-print(json_path)
+  print()
+  print()
 
-print()
-print()
-input('3º: Select the folder to save the classified images')
+if json_path is None:
+  input('2º: Select the Json to classify')
 
-directory_path = filedialog.askdirectory()
-print('Folder path:')
-print(directory_path)
+  json_path = filedialog.askopenfilename()
+  print('Json path:')
+  print(json_path)
+
+  print()
+  print()
+
+if output_folder is None:
+  input('3º: Select the folder to save the classified images')
+
+  directory_path = filedialog.askdirectory()
+  print('Folder path:')
+  print(directory_path)
 
 with open(json_path, 'r') as file:
   data = json.load(file)
