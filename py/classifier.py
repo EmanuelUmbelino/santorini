@@ -6,7 +6,7 @@ import json
 
 image_path = None
 json_path = None
-output_folder = None
+directory_path = None
 
 if image_path is None:
   input('Select the image you want to classify')
@@ -19,7 +19,6 @@ if image_path is None:
   print(image_path)
 
   print()
-  print()
 
 if json_path is None:
   input('Select the Json to classify')
@@ -29,9 +28,8 @@ if json_path is None:
   print(json_path)
 
   print()
-  print()
 
-if output_folder is None:
+if directory_path is None:
   input('Select the folder to save the classified images')
 
   directory_path = filedialog.askdirectory()
@@ -52,19 +50,8 @@ grid_height = grid['height']
 
 classification = data['classification']
 
-width_margin = grid_width * 0.05
-height_margin = grid_height * 0.05
-
 
 im = Image.open(image_path).resize((width, height))
-
-board = im.crop((
-  grid_left - width_margin,
-  grid_top - height_margin,
-  grid_width + grid_left + width_margin,
-  grid_height + grid_top + height_margin
-))
-board.save(directory_path + '/board.jpg')
 
 square_w = grid_width / 5
 square_h = grid_height / 5
@@ -84,8 +71,3 @@ for i in range(5):
       os.mkdir(newPath)
     name = len(os.listdir(newPath))+1
     square.save(newPath + '/' + str(name) + '.jpg')
-
-
-print('')
-input('Done! You can check the folder.')
-
