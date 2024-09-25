@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
 import json
+import time
 
 image_path = None
 json_path = None
@@ -69,5 +70,6 @@ for i in range(5):
     newPath = directory_path + '/' + classification[i][j]
     if not os.path.exists(newPath):
       os.mkdir(newPath)
-    name = len(os.listdir(newPath))+1
+    name = time.time()
     square.save(newPath + '/' + str(name) + '.jpg')
+    time.sleep(0.01)
