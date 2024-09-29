@@ -1,0 +1,3 @@
+IMAGE_PATH = None
+JSON_PATH = None
+OUTPUT_FOLDER = None
