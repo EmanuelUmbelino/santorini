@@ -3,8 +3,9 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
 import json
+from datetime import datetime
 
-image_path = None
+image_path =  None
 json_path = None
 output_folder = None
 
@@ -64,12 +65,27 @@ board = im.crop((
   grid_width + grid_left + width_margin,
   grid_height + grid_top + height_margin
 ))
-board.save(directory_path + '/board.jpg')
+board.save(output_folder + '/board.jpg')
 
 square_w = grid_width / 5
 square_h = grid_height / 5
 square_mw = square_w * 0.1
 square_mh = square_h * 0.1
+
+color_gray = 0
+color_blue = 0
+
+for i in range(5):
+  for j in range(5):
+    color = classification[i][j][1]
+    if color == 'G':
+        color_gray += 1
+    if color == 'B':
+      color_blue += 1
+
+if color_gray != 2 or color_blue != 2:
+  raise Exception("Invalid board")
+
 
 for i in range(5):
   for j in range(5):
@@ -79,10 +95,11 @@ for i in range(5):
       grid_left + ((j+1) * square_w) + square_mw,
       grid_top + ((i+1) * square_h) + square_mh,
     ))
-    newPath = directory_path + '/' + classification[i][j]
+    newPath = output_folder + '/' + classification[i][j]
     if not os.path.exists(newPath):
       os.mkdir(newPath)
-    name = len(os.listdir(newPath))+1
+      now = datetime.now()
+    name = datetime.now().timestamp()
     square.save(newPath + '/' + str(name) + '.jpg')
 
 
