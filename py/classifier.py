@@ -3,8 +3,8 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
 import json
-from datetime import datetime
 from constants import *
+import time
 
 if IMAGE_PATH is None:
   input('1º: Select the image you want to classify')
@@ -17,7 +17,6 @@ if IMAGE_PATH is None:
   print(IMAGE_PATH)
 
   print()
-  print()
 
 if JSON_PATH is None:
   input('2º: Select the Json to classify')
@@ -26,7 +25,6 @@ if JSON_PATH is None:
   print('Json path:')
   print(JSON_PATH)
 
-  print()
   print()
 
 if OUTPUT_FOLDER is None:
@@ -50,19 +48,8 @@ grid_height = grid['height']
 
 classification = data['classification']
 
-width_margin = grid_width * 0.05
-height_margin = grid_height * 0.05
-
 
 im = Image.open(IMAGE_PATH).resize((width, height))
-
-board = im.crop((
-  grid_left - width_margin,
-  grid_top - height_margin,
-  grid_width + grid_left + width_margin,
-  grid_height + grid_top + height_margin
-))
-board.save(OUTPUT_FOLDER + '/board.jpg')
 
 square_w = grid_width / 5
 square_h = grid_height / 5
@@ -95,11 +82,6 @@ for i in range(5):
     newPath = OUTPUT_FOLDER + '/' + classification[i][j]
     if not os.path.exists(newPath):
       os.mkdir(newPath)
-      now = datetime.now()
-    name = datetime.now().timestamp()
+    name = time.time()
     square.save(newPath + '/' + str(name) + '.jpg')
-
-
-print('')
-input('Done! You can check the folder.')
-
+    time.sleep(0.01)
